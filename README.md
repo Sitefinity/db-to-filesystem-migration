@@ -10,9 +10,9 @@ Before executing the code, backup of project files and database should be create
 
 # Steps to execute the migration:
 
-1. Host ConfigMigration.aspx page in your application and integrate it in your project.
+1. Host ConfigMigration.aspx page in your application under ~/Sitefinity and integrate it in your project.
 
-2. Navigate to ~\ConfigMigration.aspx page 
+2. Navigate to ~/Sitefinity/ConfigMigration.aspx page (you should be logged with Sitefinity administrator user) 
 
 3. Click on Migrate button
 
