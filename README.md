@@ -1,37 +1,35 @@
-# Migration of Sitefinity configurations from Database to FileSystem
+# Migrate Sitefinity CMS configurations from the Database to the FileSystem
 
-Aspx page, which helps to extract Sitefinity configurations which are stored in the Database to the FileSystem. The code runs only on applications which are configured to store configurations in the Database: 
+You migrate Sitefinity CMS configurations from the database to the file system, using an ASPX page, which helps to extract the configurations. The code runs only on applications, which are configured to store configurations in the database:
 
   ```<sitefinityConfig storageMode="Database" />```
 
-Before executing the code, backup of project files and database should be created.
+**IMPORTANT**: Before executing the code, you must backup project files and database.
 
-
-
-# Steps to execute the migration:
+## Procedure:
 
 1. Host ConfigMigration.aspx page in your application under ~/Sitefinity and integrate it in your project.
 
-2. Navigate to ~/Sitefinity/ConfigMigration.aspx page (you should be logged with Sitefinity administrator user) 
+2. Navigate to ~/Sitefinity/ConfigMigration.aspx page. 
 
-3. Click on Migrate button
+   You should be logged as administrator.
 
-  - automatic back up of your current configurations stored in ~\App_Data\Sitefinity\Configuration will be created in the Configuration folder with format "_config_migration_backup"+"Time stamp"
+3. Click *Migrate*
 
-  - all existing Sitefinity configurations are extracted and saved in ~\App_Data\Sitefinity\Configuration
+  * The system creates an automatic back up of your current configurations, which are stored in ~\App_Data\Sitefinity\Configuration folder, and stores it in the same folder with format _config_migration_backup"+"Time stamp"
 
-4. Update in web.config 
+  * All existing Sitefinity CMS configurations are extracted and saved in ~\App_Data\Sitefinity\Configuration folder.
 
-  ```<sitefinityConfig storageMode="Database" />``` to ```<sitefinityConfig storageMode="FileSystem" />```
+4. Update in web.config by replacing
+
+  ```<sitefinityConfig storageMode="Database" />``` with ```<sitefinityConfig storageMode="FileSystem" />```
 
 5. Recycle the application pool of the website.
 
-6. Make sure your site is working correctly.
-
-
-
-After confirming all is OK.
-
-1. Delete all rows from [sf_xml_config_items]
-
-2. Clean up the backups created in ~\App_Data\Sitefinity\Configuration
+   Validate that your site is working correctly.
+   
+   After confirming that the application functions as expected, perform the following:
+   
+        a. In the database, delete all rows from table [sf_xml_config_items]
+    
+        b. Clean up the backups created in ~\App_Data\Sitefinity\Configuration folder.
