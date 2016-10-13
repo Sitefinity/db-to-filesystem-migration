@@ -16,7 +16,7 @@ You migrate Sitefinity CMS configurations from the database to the file system, 
 
 3. Click *Migrate*
 
-  * The system creates an automatic back up of your current configurations, which are stored in ~\App_Data\Sitefinity\Configuration folder, and stores it in the same folder with format _config_migration_backup"+"Time stamp"
+  * The system creates an automatic back up of your current configurations, which are stored in ~\App_Data\Sitefinity\Configuration folder, and stores it in the same folder with format "_config_migration_backup"+"Time stamp"
 
   * All existing Sitefinity CMS configurations are extracted and saved in ~\App_Data\Sitefinity\Configuration folder.
 
