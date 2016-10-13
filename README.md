@@ -30,6 +30,6 @@ You migrate Sitefinity CMS configurations from the database to the file system, 
    
    After confirming that the application functions as expected, perform the following:
    
-        a. In the database, delete all rows from table [sf_xml_config_items]
+      * In the database, delete all rows from table [sf_xml_config_items]
     
-        b. Clean up the backups created in ~\App_Data\Sitefinity\Configuration folder.
+      * Clean up the backups created in ~\App_Data\Sitefinity\Configuration folder.
