@@ -8,7 +8,9 @@ You migrate Sitefinity CMS configurations from the database to the file system, 
 
 ## Procedure:
 
-1. Host ConfigMigration.aspx page in your application under ```~/Sitefinity``` and integrate it in your project.
+1. Host ConfigMigration.aspx page in your application under ```~/Sitefinity``` and include it in your project.
+
+1.1 Rebuild the project with the included page and code behind
 
 2. Navigate to ```~/Sitefinity/ConfigMigration.aspx``` page. 
 
