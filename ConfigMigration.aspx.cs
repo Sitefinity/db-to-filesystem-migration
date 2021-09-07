@@ -25,7 +25,7 @@ namespace SitefinityWebApp
             if (storageMode == ConfigStorageMode.Database)
             {
                 this.MigrateAllConfigurations();
-            }             
+            }
         }
 
         public void MigrateAllConfigurations()
@@ -34,7 +34,7 @@ namespace SitefinityWebApp
             string response = String.Empty;
             string configurationPath = HttpContext.Current.Server.MapPath("~/App_Data/Sitefinity/Configuration/");
             string backupPath = configurationPath + "_config_migration_backup_" + DateTime.UtcNow.ToLongTimeString().Replace(":", "_").Replace(" ", "_") + "/";
-            Directory.CreateDirectory(backupPath);           
+            Directory.CreateDirectory(backupPath);
 
             string[] configFilesList = System.IO.Directory.GetFiles(configurationPath);
 
@@ -51,6 +51,8 @@ namespace SitefinityWebApp
             foreach (var tagName in this.GetConfigurations())
             {
                 var section = manager.GetSection(tagName);
+
+                LoadLazyConfigsRecursive(section);
 
                 var parentType = typeof(XmlConfigProvider);
                 var migrationStorageModeRegionType = parentType.GetNestedType("MigrationStorageModeRegion", BindingFlags.NonPublic);
@@ -74,7 +76,6 @@ namespace SitefinityWebApp
                 .Select(c => c.TagName);
         }
 
-
         internal object GetInstanceField(Type type, object instance, string fieldName)
         {
             BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
@@ -92,6 +93,23 @@ namespace SitefinityWebApp
             }
 
             return storageMode;
+        }
+
+        private void LoadLazyConfigsRecursive(ConfigElement configElement)
+        {
+            var sectionProperties = configElement.Properties;
+
+            foreach (ConfigProperty property in sectionProperties)
+            {
+                object value = configElement[property.Name];
+                if (value is ConfigElementCollection collection)
+                {
+                    foreach (var item in collection)
+                    {
+                        LoadLazyConfigsRecursive(item);
+                    }
+                }
+            }
         }
     }
 }
